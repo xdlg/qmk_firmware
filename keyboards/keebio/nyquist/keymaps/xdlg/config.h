@@ -17,7 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-/* Select hand configuration */
 #define MASTER_LEFT
-
-#define ONESHOT_TAP_TOGGLE 5
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
