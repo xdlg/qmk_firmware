@@ -8,6 +8,12 @@
 #define OSLS OSM(MOD_LSFT)
 #define OSRS OSM(MOD_RSFT)
 
+enum custom_keycodes {
+  ALT_TAB = SAFE_RANGE,
+};
+
+bool is_alt_tab_active = false;
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Dvorak
@@ -20,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  | Shift|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  | FUN  | Alt  |    Space    |    Enter    | SYM  |      | Del  | Ctrl |
+ * | Ctrl | GUI  | FUN  | Alt  |    Space    |    Enter    | SYM  |AltTab| Del  | Ctrl |
  * `-----------------------------------------------------------------------------------'
  */
 [DVO] = LAYOUT( \
@@ -28,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH, \
   MO(NAV), KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_MINS, \
   OSLS,    KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    OSRS,    \
-  KC_LCTL, KC_LCMD, OSL(FUN),KC_LALT, KC_SPC,  KC_SPC,  KC_ENT,  KC_ENT,  OSL(SYM),XXXXXXX, KC_DEL,  KC_RCTL  \
+  KC_LCTL, KC_LCMD, OSL(FUN),KC_LALT, KC_SPC,  KC_SPC,  KC_ENT,  KC_ENT,  OSL(SYM),ALT_TAB, KC_DEL,  KC_RCTL  \
 ),
 
 /* Symbols
@@ -121,4 +127,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void persistent_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
   default_layer_set(default_layer);
+}
+
+// Functionality is the following (basically the same thing as a normal Alt + Tab but without having
+// to leave Alt pressed):
+// - On pressing ALT_TAB, the window switch menu pops up.
+// - While the menu is visible, it's possible to cycle through the selection by pressing ALT_TAB
+//   again, or Shift + ALT_TAB, or the arrow keys.
+// - The selected window can be brought up by pressing Enter, which also closes the menu.
+//   Alternatively, pressing Escape closes the menu without selecting anything.
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case ALT_TAB:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        }
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      return false;
+
+    case KC_ENTER:
+      if (record->event.pressed) {
+        if (is_alt_tab_active) {
+          unregister_code(KC_LALT);
+          is_alt_tab_active = false;
+          return false;
+        }
+      }
+      return true;
+
+    case KC_ESCAPE:
+      if (record->event.pressed) {
+        if (is_alt_tab_active) {
+          register_code(KC_ESCAPE);
+          unregister_code(KC_LALT);
+          unregister_code(KC_ESCAPE);
+          is_alt_tab_active = false;
+          return false;
+        }
+      }
+      return true;
+
+    default:
+      return true;
+  }
 }
