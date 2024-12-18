@@ -5,10 +5,12 @@
 #define FUN 2
 
 // Left-hand home row modifiers
-#define U_CTRL LCTL_T(KC_U)
+#define U_SHFT LSFT_T(KC_U)
+#define E_CTRL LCTL_T(KC_E)
 
 // Right-hand home row modifiers
-#define H_CTRL RCTL_T(KC_H)
+#define H_SHFT RSFT_T(KC_H)
+#define T_CTRL RCTL_T(KC_T)
 
 enum custom_keycodes {
   ALT_TAB = SAFE_RANGE,
@@ -24,9 +26,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Tab  |   '  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  |  /   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | FUN  |   A  |   O  |   E  |U/Ctrl|   I  |   D  |H/Ctrl|   T  |   N  |   S  |  -   |
+ * | FUN  |   A  |   O  |E/Ctrl|U/Shft|   I  |   D  |H/Shft|T/Ctrl|   N  |   S  |  -   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  | Shift|
+ * |      |   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | GUI  |      | Alt  |    Space    |    Enter    | SYM  | AltGr|AltTab|      |
  * `-----------------------------------------------------------------------------------'
@@ -34,8 +36,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [DVO] = LAYOUT( \
   KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH, \
-  OSL(FUN),KC_A,    KC_O,    KC_E,    U_CTRL,  KC_I,    KC_D,    H_CTRL,  KC_T,    KC_N,    KC_S,    KC_MINS, \
-  KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT, \
+  OSL(FUN),KC_A,    KC_O,    E_CTRL,  U_SHFT,  KC_I,    KC_D,    H_SHFT,  T_CTRL,  KC_N,    KC_S,    KC_MINS, \
+  XXXXXXX, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    XXXXXXX, \
   XXXXXXX, KC_LCMD, XXXXXXX, KC_LALT, KC_SPC,  KC_SPC,  KC_ENT,  KC_ENT,  OSL(SYM),KC_RALT, ALT_TAB, XXXXXXX  \
 ),
 
