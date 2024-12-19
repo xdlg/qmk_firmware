@@ -2,15 +2,22 @@
 
 #define DVO 0
 #define SYM 1
-#define FUN 2
+#define NAV 2
+#define FUN 3
 
-// Left-hand home row modifiers
-#define U_SHFT LSFT_T(KC_U)
-#define E_CTRL LCTL_T(KC_E)
+// Left-hand modifiers
+#define U_SFT LSFT_T(KC_U)
+#define E_CTL LCTL_T(KC_E)
+#define O_ALT LALT_T(KC_O)
+#define A_GUI LGUI_T(KC_A)
+#define SPC_NAV LT(NAV, KC_SPC)
 
-// Right-hand home row modifiers
-#define H_SHFT RSFT_T(KC_H)
-#define T_CTRL RCTL_T(KC_T)
+// Right-hand modifiers
+#define H_SFT RSFT_T(KC_H)
+#define T_CTL RCTL_T(KC_T)
+#define N_ALT LALT_T(KC_N)
+#define S_GUI RGUI_T(KC_S)
+#define ENT_FUN LT(FUN, KC_ENT)
 
 enum custom_keycodes {
   ALT_TAB = SAFE_RANGE,
@@ -26,19 +33,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Tab  |   '  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  |  /   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | FUN  |   A  |   O  |E/Ctrl|U/Shft|   I  |   D  |H/Shft|T/Ctrl|   N  |   S  |  -   |
+ * |      | A/GUI| O/Alt| E/Ctl| U/Sft|   I  |   D  | H/Sft| T/Ctl| N/Alt| S/GUI|  -   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | GUI  |      | Alt  |    Space    |    Enter    | SYM  | AltGr|AltTab|      |
+ * |      |      |      |      |  Space/NAV  |  Enter/FUN  | SYM  | AltGr|AltTab|      |
  * `-----------------------------------------------------------------------------------'
  */
 [DVO] = LAYOUT( \
   KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
   KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH, \
-  OSL(FUN),KC_A,    KC_O,    E_CTRL,  U_SHFT,  KC_I,    KC_D,    H_SHFT,  T_CTRL,  KC_N,    KC_S,    KC_MINS, \
+  XXXXXXX, A_GUI,   O_ALT,   E_CTL,   U_SFT,   KC_I,    KC_D,    H_SFT,   T_CTL,   N_ALT,   S_GUI,   KC_MINS, \
   XXXXXXX, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    XXXXXXX, \
-  XXXXXXX, KC_LCMD, XXXXXXX, KC_LALT, KC_SPC,  KC_SPC,  KC_ENT,  KC_ENT,  OSL(SYM),KC_RALT, ALT_TAB, XXXXXXX  \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SPC_NAV, SPC_NAV, ENT_FUN, ENT_FUN, OSL(SYM),KC_RALT, ALT_TAB, XXXXXXX  \
 ),
 
 /* Symbols
@@ -62,24 +69,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
-/* Functions/navigation
+/* Navigation
  * ,-----------------------------------------------------------------------------------.
- * |      |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 | Del  |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |  F11 |  F12 |  F13 |  F14 |  F15 |      | PgUp |  Up  | PgDn |      |      |
+ * |      |      |      |      |      |      |      | PgUp |  Up  | PgDn |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |PrtScr|      | Home | Left | Down | Right| End  |      |
+ * |      |      |      |      |      |      | Home | Left | Down | Right| End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      | Mute | Vol- | Vol+ | Bts- | Bts- |      |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |             |             |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[NAV] = LAYOUT( \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,  \
+  _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_UP,   KC_PGDN, _______, _______, \
+  _______, _______, _______, _______, _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
+),
+
+/* Functions
+ * ,-----------------------------------------------------------------------------------.
+ * |      |  F1  |  F2  |  F3  |  F4  |  F5  |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |  F6  |  F7  |  F8  |  F9  |  F10 |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |  F11 |  F12 |PrtScr|      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      | Mute | Vol- | Vol+ | Bts- | Bts- |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [FUN] = LAYOUT( \
-  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL,  \
-  _______, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,  _______, KC_PGUP, KC_UP,   KC_PGDN, _______, _______, \
-  _______, _______, _______, _______, KC_PSCR, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  _______, \
-  _______, _______, _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_BRID, KC_BRIU, _______, \
+  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, _______, _______, _______, _______, \
+  _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, _______, _______, _______, _______, _______, \
+  _______, KC_F11,  KC_F12,  KC_PSCR, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, KC_MUTE, KC_VOLD, KC_VOLU, KC_BRID, KC_BRIU, _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 )
 
