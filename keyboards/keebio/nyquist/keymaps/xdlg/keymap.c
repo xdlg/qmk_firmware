@@ -7,19 +7,46 @@
 #define FUN_SPC LT(FUN, KC_SPC)
 #define SYM_ENT LT(SYM, KC_ENT)
 
+#define ALT_1 RALT(KC_1)
+#define ALT_2 RALT(KC_2)
+#define ALT_3 RALT(KC_3)
+#define ALT_4 RALT(KC_4)
+#define ALT_5 RALT(KC_5)
+#define ALT_8 RALT(KC_8)
+#define ALT_9 RALT(KC_9)
+#define ALT_0 RALT(KC_0)
+#define ALT_QUO RALT(KC_QUOT)
+#define ALT_COM RALT(KC_COMM)
+#define ALT_DOT RALT(KC_DOT)
+#define ALT_P RALT(KC_P)
+#define ALT_Y RALT(KC_Y)
+#define ALT_C RALT(KC_C)
+#define ALT_A RALT(KC_A)
+#define ALT_O RALT(KC_O)
+#define ALT_E RALT(KC_E)
+#define ALT_U RALT(KC_U)
+#define ALT_I RALT(KC_I)
+#define ALT_N RALT(KC_N)
+#define ALT_S RALT(KC_S)
+#define ALT_SCL RALT(KC_SCLN)
+#define ALT_Q RALT(KC_Q)
+#define ALT_J RALT(KC_J)
+#define ALT_K RALT(KC_K)
+#define ALT_X RALT(KC_X)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Dvorak
  * ,-----------------------------------------------------------------------------------.
- * | Esc  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |  Esc |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   "  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  |  /   |
+ * |  Tab |   '  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  |  /   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  -   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  | Shift|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl | GUI  |      | Alt  |  FUN/Space  |  SYM/Enter  | Alt  |      |      | Ctrl |
+ * | Ctrl |  GUI |      |  Alt |  FUN/Space  |  SYM/Enter  |  Alt |      |      | Ctrl |
  * `-----------------------------------------------------------------------------------'
  */
 [DVO] = LAYOUT( \
@@ -32,28 +59,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Symbols
  * ,-----------------------------------------------------------------------------------.
- * |      |   [  |   ]  |   {  |   }  |      |      |      |      |      |      |      |
+ * |      | RAlt1| RAlt2| RAlt3| RAlt4| RAlt5|   ~  |   `  | RAlt8| RAlt9| RAlt0|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |   `  |   ~  |      |      |      |      |      |      |      |      |   \  |
+ * |      | RAlt'| RAlt,| RAlt.| RAltP| RAltY|      |      | RAltC|      |      |   \  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |   =  |
+ * |      | RAltA| RAltO| RAltE| RAltU| RAltI|      |      |      | RAltN| RAltS|   =  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      | RAlt;| RAltQ| RAltJ| RAltK| RAltX|      |   {  |   }  |   [  |   ]  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [SYM] = LAYOUT( \
-  _______, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, _______, _______, _______, _______, _______, _______, \
-  _______, KC_GRV,  KC_TILD, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSLS, \
-  _______, _______, _______, _______, _______, _______, _______,_______ , _______, _______, _______, KC_EQL , \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+  _______, ALT_1,   ALT_2,   ALT_3,   ALT_4,   ALT_5,   KC_TILD, KC_GRV,  ALT_8,   ALT_9,   ALT_0,   _______, \
+  _______, ALT_QUO, ALT_COM, ALT_DOT, ALT_P,   ALT_Y,   _______, _______, ALT_C,   _______, _______, KC_BSLS, \
+  _______, ALT_A,   ALT_O,   ALT_E,   ALT_U,   ALT_I,   _______,_______ , _______, ALT_N,   ALT_S,   KC_EQL , \
+  _______, ALT_SCL, ALT_Q,   ALT_J,   ALT_K,   ALT_X,   _______, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
 /* Functions/navigation
  * ,-----------------------------------------------------------------------------------.
- * |      |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 | Del  |
+ * |      |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  Del |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  F11 |  F12 |  F13 |  F14 |  F15 |      | PgUp |  Up  | PgDn |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
