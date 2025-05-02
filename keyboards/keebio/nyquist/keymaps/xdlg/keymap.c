@@ -62,9 +62,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | RAlt'| RAlt,| RAlt.| RAltP| RAltY|      |      | RAltC|      |      |   \  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | RAltA| RAltO| RAltE| RAltU| RAltI|      |      |      | RAltN| RAltS|   =  |
+ * |      | RAltA| RAltO| RAltE| RAltU| RAltI|      |   {  |   }  | RAltN| RAltS|   =  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | RAlt;| RAltQ| RAltJ| RAltK| RAltX|      |   {  |   }  |   [  |   ]  |      |
+ * |      | RAlt;| RAltQ| RAltJ| RAltK| RAltX|      |   [  |   ]  |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |             |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -72,8 +72,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [SYM] = LAYOUT( \
   _______, ALT_1,   ALT_2,   ALT_3,   ALT_4,   ALT_5,   KC_TILD, KC_GRV,  ALT_8,   ALT_9,   ALT_0,   _______, \
   _______, ALT_QUO, ALT_COM, ALT_DOT, ALT_P,   ALT_Y,   _______, _______, ALT_C,   _______, _______, KC_BSLS, \
-  _______, ALT_A,   ALT_O,   ALT_E,   ALT_U,   ALT_I,   _______,_______ , _______, ALT_N,   ALT_S,   KC_EQL , \
-  _______, ALT_SCL, ALT_Q,   ALT_J,   ALT_K,   ALT_X,   _______, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, _______, \
+  _______, ALT_A,   ALT_O,   ALT_E,   ALT_U,   ALT_I,   _______, KC_LCBR, KC_RCBR, ALT_N,   ALT_S,   KC_EQL , \
+  _______, ALT_SCL, ALT_Q,   ALT_J,   ALT_K,   ALT_X,   _______, KC_LBRC, KC_RBRC, _______, _______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
